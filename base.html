@@ -5,44 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testing</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".imoge").fadeOut("slow");
-        });
-    </script>
+    <link rel="stylesheet" href="style.css">
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="script.js"></script>
 
 </head>
 <body>
 
-    <div id="image_url_1"></div>
-    <div id="image_url_2"></div>
+    <div class="container">
+        <div class="header">
+            <h1 class="text-muted">Ads slider</h1>
+        </div>
 
-    <div class="test">
-        <img class="imoge" src="images/img1.jpg"alt="error"/>
+    <div id="slider">
+        <ul class="slides">
+            <li class="slide slide1"><img src="images/slider1.jpg"/></li>
+            <li class="slide slide2"><img src="images/slider2.jpg"/></li>
+            <li class="slide slide3"><img src="images/slider3.jpg"/></li>
+            <li class="slide slide4"><img src="images/slider4.jpg"/></li>
+            <li class="slide slide5"><img src="images/slider5.jpg"/></li>
+            <li class="slide slide1"><img src="images/slider1.jpg"/></li>
+        </ul>
     </div>
-    <h1>Home</h1>
-    <button id="templateA" type="button">Switch template A</button>
-    <button id="templateB" type="button">Switch template B</button>
-    <button id="templateC" type="button">Switch template C</button>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <img></img>
-    <img></img>
-    <img></img>
-    <img></img>
-    <img></img>
 
+</div>
 
 </body>
 </html>

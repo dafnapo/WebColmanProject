@@ -1,5 +1,7 @@
+'use strict';
+
 var ads = [
-    new Ad({
+    {
         name: "one",
         templateUrl: "templates/templateA.html",
         texts: ["text1", "text2", "text3", "text4"],
@@ -19,8 +21,8 @@ var ads = [
         toDate: "12/31/2022",
         timeDuration: 3,
         screens: {"1": true, "2": true}
-    }),
-    new Ad({
+    },
+    {
         name: "two",
         templateUrl: "templates/templateB.html",
         texts: ["text1", "text2", "text3", "text4", "text5", "text6", "text7", "text8", "text9", "text10"],
@@ -39,8 +41,8 @@ var ads = [
         toDate: "4/31/2022",
         timeDuration: 5,
         screens: {"1": true, "3": true}
-    }),
-    new Ad({
+    },
+    {
         name: "three",
         templateUrl: "templates/templateC.html",
         texts: [],
@@ -54,8 +56,8 @@ var ads = [
         toDate: "6/15/2022",
         timeDuration: 7,
         screens: {"2": true, "3": true}
-    }),
-    new Ad({
+    },
+    {
         name: "four",
         templateUrl: "templates/templateA.html",
         texts: ["text1", "text2"],
@@ -70,8 +72,8 @@ var ads = [
         toDate: "4/15/2022",
         timeDuration: 4,
         screens: {"1": true}
-    }),
-    new Ad({
+    },
+    {
         name: "five",
         templateUrl: "templates/templateB.html",
         texts: ["text1", "text2", "text3", "text4", "text5", "text6", "text7"],
@@ -93,5 +95,45 @@ var ads = [
         toDate: "4/31/2022",
         timeDuration: 6,
         screens: {"3": true}
-    })
+    }
 ];
+
+$(document).ready(function() {
+
+    //settings for slider
+    var width = 720;
+    var animationSpeed = 1000;
+    var pause = 3000;
+    var currentSlide = 1;
+
+    console.log(ads[0]);
+
+    //cache DOM elements
+    var $slider = $('#slider');
+    var $slideContainer = $('.slides', $slider);
+    var $slides = $('.slide', $slider);
+
+    var interval;
+
+    function startSlider() {
+        interval = setInterval(function() {
+            $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                if (++currentSlide === $slides.length) {
+                    currentSlide = 1;
+                    $slideContainer.css('margin-left', 0);
+                }
+            });
+        }, pause);
+    }
+    function pauseSlider() {
+        clearInterval(interval);
+    }
+
+    $slideContainer
+        .on('mouseenter', pauseSlider)
+        .on('mouseleave', startSlider);
+
+    startSlider();
+
+
+});
