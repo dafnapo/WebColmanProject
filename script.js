@@ -5,7 +5,7 @@ var ads = [
         name: "one",
         templateUrl: "templates/templateA.html",
         texts: ["text1", "text2", "text3", "text4"],
-        imagesUrl: ["images/img1.jpg", "images/img2.jpg"],
+        imagesUrl: ["images/slider1.jpg", "images/slider2.jpg"],
         days: {
             monday: {
                 fromHour: 6,
@@ -26,7 +26,7 @@ var ads = [
         name: "two",
         templateUrl: "templates/templateB.html",
         texts: ["text1", "text2", "text3", "text4", "text5", "text6", "text7", "text8", "text9", "text10"],
-        imagesUrl: ["images/img1.jpg"],
+        imagesUrl: ["images/slider1.jpg"],
         days: {
             tuesday: {
                 fromHour: 10,
@@ -46,7 +46,7 @@ var ads = [
         name: "three",
         templateUrl: "templates/templateC.html",
         texts: [],
-        imagesUrl: [],
+        imagesUrl: ["images/slider1.jpg", "images/slider2.jpg"],
         days: {
             all: true,
             fromHour: 8,
@@ -77,7 +77,7 @@ var ads = [
         name: "five",
         templateUrl: "templates/templateB.html",
         texts: ["text1", "text2", "text3", "text4", "text5", "text6", "text7"],
-        imagesUrl: ["images/img1.jpg", "images/img2.jpg"],
+        imagesUrl: ["images/slider1.jpg", "images/slider2.jpg"],
         days: {
             monday: {
                 fromHour: 1,
@@ -123,23 +123,27 @@ $(document).ready(function() {
             Object.keys(ad.days).forEach(day=>{
                 if(dayz[dt.getDay()]===day||day==="all"){
                     if(hourCheck(ad.days.fromHour,ad.days.toHour,dt.getHours())){
+                        
+                        //settings for slider
                         var width = 720;
                         var animationSpeed = 1000;
-                        var pause = 3000;
-                        var currentSlide = ad.timeDuration;
+                        var pause = ad.timeDuration*100;//*1000
+                        var currentSlide = 1;
 
+                        //cache DOM elements
                         var $slider = $('#slider');
-                        // console.log($slider)
+                        console.log($slider)
                         var $slideContainer = $('.slides', $slider);
-                        // console.log($slideContainer)
+                        console.log($slideContainer)
                         var $slides = $('.slide', $slider);
-                        // console.log($slides)
-                    
+                        console.log($slides)
                     
                         var interval;
-                    
                         function startSlider() {
                             interval = setInterval(function() {
+                                ad.imagesUrl.forEach(img=>{
+                                    console.log(img);
+                                })
                                 $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
                                     if (++currentSlide === $slides.length) {
                                         currentSlide = 1;
@@ -162,15 +166,4 @@ $(document).ready(function() {
             })
         }
     })
-
-    //settings for slider
-    var width = 720;
-    var animationSpeed = 1000;
-    var pause = 3000;
-    var currentSlide = 1;
-
-    //cache DOM elements
-
-
-
 });
