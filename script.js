@@ -52,7 +52,7 @@ var ads = [
             fromHour: 8,
             toHour: 22
         },
-        fromDate: "5/1/2022",
+        fromDate: "1/1/2022",
         toDate: "6/15/2022",
         timeDuration: 7,
         screens: {"2": true, "3": true}
@@ -100,40 +100,77 @@ var ads = [
 
 $(document).ready(function() {
 
+    var dt= new Date();
+    var dayz = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+
+    const dateCheck = (from, to, check) => {
+        let fDate,lDate,cDate;
+        fDate = Date.parse(from);
+        lDate = Date.parse(to);
+        cDate = Date.parse(check);
+        if((cDate <= lDate && cDate >= fDate))  return true
+        return false;
+    }
+
+    const hourCheck = (from, to, check) => {
+        if((check <= to && check >= from))  return true
+        return false;
+    }
+
+
+    ads.forEach(ad=>{
+        if(dateCheck(ad.fromDate,ad.toDate,dt.getMonth()+1+"/"+dt.getDate()+"/"+dt.getFullYear())){
+            Object.keys(ad.days).forEach(day=>{
+                if(dayz[dt.getDay()]===day||day==="all"){
+                    if(hourCheck(ad.days.fromHour,ad.days.toHour,dt.getHours())){
+                        var width = 720;
+                        var animationSpeed = 1000;
+                        var pause = 3000;
+                        var currentSlide = ad.timeDuration;
+
+                        var $slider = $('#slider');
+                        // console.log($slider)
+                        var $slideContainer = $('.slides', $slider);
+                        // console.log($slideContainer)
+                        var $slides = $('.slide', $slider);
+                        // console.log($slides)
+                    
+                    
+                        var interval;
+                    
+                        function startSlider() {
+                            interval = setInterval(function() {
+                                $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                                    if (++currentSlide === $slides.length) {
+                                        currentSlide = 1;
+                                        $slideContainer.css('margin-left', 0);
+                                    }
+                                });
+                            }, pause);
+                        }
+                        function pauseSlider() {
+                            clearInterval(interval);
+                        }
+                    
+                        $slideContainer
+                            .on('mouseenter', pauseSlider)
+                            .on('mouseleave', startSlider);
+                    
+                        startSlider();
+                    }
+                }
+            })
+        }
+    })
+
     //settings for slider
     var width = 720;
     var animationSpeed = 1000;
     var pause = 3000;
     var currentSlide = 1;
 
-    console.log(ads[0]);
-
     //cache DOM elements
-    var $slider = $('#slider');
-    var $slideContainer = $('.slides', $slider);
-    var $slides = $('.slide', $slider);
 
-    var interval;
-
-    function startSlider() {
-        interval = setInterval(function() {
-            $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
-                if (++currentSlide === $slides.length) {
-                    currentSlide = 1;
-                    $slideContainer.css('margin-left', 0);
-                }
-            });
-        }, pause);
-    }
-    function pauseSlider() {
-        clearInterval(interval);
-    }
-
-    $slideContainer
-        .on('mouseenter', pauseSlider)
-        .on('mouseleave', startSlider);
-
-    startSlider();
 
 
 });
