@@ -56,14 +56,14 @@ var ads = [
   {
     name: "three",
     templateUrl: "templates/templateC.html",
-    texts: ["text1", "text2", "text3", "text4", "text5", "text6", "text7"],
-    imagesUrl: ["images/slider1.jpg", "images/slider2.jpg"],
+    texts: [],
+    imagesUrl: [],
     days: {
       all: true,
       fromHour: 8,
       toHour: 22,
     },
-    fromDate: "1/1/2022",
+    fromDate: "5/1/2022",
     toDate: "6/15/2022",
     timeDuration: 7,
     screens: { 2: true, 3: true },
@@ -160,7 +160,6 @@ $(document).ready(function () {
             var $imagem;
 
             var $template = ad.templateUrl;
-            console.log($template);
             $slider.load($template);
 
             var interval;
