@@ -116,7 +116,27 @@ $(document).ready(function() {
         if((check <= to && check >= from))  return true
         return false;
     }
+    var imagem=document.createElement("img");
+    imagem.src="images/slider1.jpg";
+    imagem.alt="ads";
+    div.appendChild(imagem);
 
+    // function placeImage(x)
+    // {
+    //     var div = document.getElementById("slides");
+
+    //     div.innerHTML = ""; // clear images
+
+    //     for (counter=1;counter<=x;counter++) {
+    //         var imagem=document.createElement("img");
+    //         imagem.src="images/slider"+counter+".jpg";
+    //         div.appendChild(imagem);
+    //     }
+    // }
+
+    // window.onload = function() {
+    //     placeImage(48);
+    // };
 
     ads.forEach(ad=>{
         if(dateCheck(ad.fromDate,ad.toDate,dt.getMonth()+1+"/"+dt.getDate()+"/"+dt.getFullYear())){
@@ -129,23 +149,25 @@ $(document).ready(function() {
                         var animationSpeed = 1000;
                         var pause = ad.timeDuration*100;//*1000
                         var currentSlide = 1;
+                        var imagem=document.createElement("img");
 
                         //cache DOM elements
                         var $slider = $('#slider');
-                        console.log($slider)
+                        console.log($slider);
                         var $slideContainer = $('.slides', $slider);
-                        console.log($slideContainer)
+                        console.log($slideContainer);
                         var $slides = $('.slide', $slider);
-                        console.log($slides)
-                    
+                        console.log($slides);
+
+
                         var interval;
                         function startSlider() {
-                            interval = setInterval(function() {
-                                ad.imagesUrl.forEach(img=>{
-                                    console.log(img);
-                                })
-                                $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
-                                    if (++currentSlide === $slides.length) {
+                            interval = setInterval(function() {                                    
+                                $slider.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                                    imagem.src="images/slider"+currentSlide+".jpg";
+                                    console.log(imagem);
+                                    $slider.append(imagem);
+                                    if (++currentSlide === ad.imagesUrl.length) {
                                         currentSlide = 1;
                                         $slideContainer.css('margin-left', 0);
                                     }
